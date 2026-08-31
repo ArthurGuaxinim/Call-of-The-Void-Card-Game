@@ -1,11 +1,16 @@
 extends Node2D
 var card_being_dragged
+var screen_size
 var drag_offset := Vector2.ZERO
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position()
-		card_being_dragged.position = mouse_pos + drag_offset
+		card_being_dragged.position = Vector2(clamp(mouse_pos.x, 0, screen_size.x), 
+		clamp(mouse_pos.y, 0, screen_size.y))
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -33,8 +38,5 @@ func raycast_check_for_card():
 		print(result)
 		return result[0].collider.get_parent()
 	return null
-func _ready() -> void:
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
