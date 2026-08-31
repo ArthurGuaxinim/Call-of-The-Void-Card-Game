@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://3m7a3sx5krp4"]
+
+[ext_resource type="Texture2D" uid="uid://k1vciya80hix" path="res://Assets/Assets_Test/CartaDev.png" id="1_532eq"]
+
+[node name="Guaxinim-2D - tests" type="Node2D" unique_id=1893147514]
+
+[node name="Main" type="Node2D" parent="." unique_id=194709401]
+
+[node name="Sprite2D" type="Sprite2D" parent="Main" unique_id=1369771804]
+position = Vector2(560.99994, 304.00003)
+scale = Vector2(0.12014726, 0.12014724)
+texture = ExtResource("1_532eq")

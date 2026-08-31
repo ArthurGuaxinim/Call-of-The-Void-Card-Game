@@ -8,12 +8,10 @@ size = Vector2(143, 201)
 [node name="Card" type="Node2D" unique_id=1435173483]
 
 [node name="Cardimage" type="Sprite2D" parent="." unique_id=391531402]
-position = Vector2(642, 281)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_842hm")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=206297812]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1106385118]
-position = Vector2(643.5, 281.5)
 shape = SubResource("RectangleShape2D_bhunq")
