@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b4kc78j5u1l86"]
+
+[ext_resource type="Script" uid="uid://dbmoakh1tv7ue" path="res://Scripts/Scripts_Test_Nier/cardmanager.gd" id="1_oj4eh"]
+[ext_resource type="PackedScene" uid="uid://bxnvqpsite2ft" path="res://Scene/Scene_Tests_Nier/card.tscn" id="2_ibdkg"]
+
+[node name="Main" type="Node2D" unique_id=1349095549]
+
+[node name="Cardmanager" type="Node2D" parent="." unique_id=268585478]
+script = ExtResource("1_oj4eh")
+
+[node name="Card" parent="Cardmanager" unique_id=1435173483 instance=ExtResource("2_ibdkg")]
+
+[node name="Card2" parent="Cardmanager" unique_id=2079773275 instance=ExtResource("2_ibdkg")]
+position = Vector2(171, -4)

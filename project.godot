@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Call Of The Void CardGame"
+run/main_scene="uid://b4kc78j5u1l86"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
