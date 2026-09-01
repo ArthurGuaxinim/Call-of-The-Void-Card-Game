@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://bxnvqpsite2ft"]
 
 [ext_resource type="Texture2D" uid="uid://k1vciya80hix" path="res://Assets/Assets_Test/CartaDev.png" id="1_842hm"]
+[ext_resource type="Script" uid="uid://q4wcxwnoqrh5" path="res://Scene/Scene_Tests_Nier/card.gd" id="1_vvtma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
 size = Vector2(143, 201)
 
 [node name="Card" type="Node2D" unique_id=1435173483]
+script = ExtResource("1_vvtma")
 
 [node name="Cardimage" type="Sprite2D" parent="." unique_id=391531402]
 scale = Vector2(0.1, 0.1)
@@ -15,3 +17,6 @@ texture = ExtResource("1_842hm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1106385118]
 shape = SubResource("RectangleShape2D_bhunq")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
