@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dbmoakh1tv7ue" path="res://Scripts/Scripts_Test_Nier/cardmanager.gd" id="1_oj4eh"]
 [ext_resource type="PackedScene" uid="uid://bxnvqpsite2ft" path="res://Scene/Scene_Tests_Nier/card.tscn" id="2_ibdkg"]
+[ext_resource type="PackedScene" uid="uid://b7hx6nxbqohdf" path="res://Scene/Scene_Tests_Nier/cardslot.tscn" id="3_ibdkg"]
+[ext_resource type="Script" uid="uid://crh3rphlwuev4" path="res://Scene/Scene_Tests_Nier/cardslot.gd" id="4_luoai"]
 
 [node name="Main" type="Node2D" unique_id=1349095549]
 
@@ -9,7 +11,13 @@
 script = ExtResource("1_oj4eh")
 
 [node name="Card" parent="Cardmanager" unique_id=1435173483 instance=ExtResource("2_ibdkg")]
-position = Vector2(317, 73)
+position = Vector2(416, 489.00003)
+scale = Vector2(1.3, 1.3)
 
-[node name="Card2" parent="Cardmanager" unique_id=2079773275 instance=ExtResource("2_ibdkg")]
-position = Vector2(125, 76)
+[node name="Card2" parent="Cardmanager" unique_id=825432900 instance=ExtResource("2_ibdkg")]
+position = Vector2(1030, 501)
+scale = Vector2(1.3, 1.3)
+
+[node name="Cardslot" parent="." unique_id=2004367645 instance=ExtResource("3_ibdkg")]
+position = Vector2(707, 497)
+script = ExtResource("4_luoai")

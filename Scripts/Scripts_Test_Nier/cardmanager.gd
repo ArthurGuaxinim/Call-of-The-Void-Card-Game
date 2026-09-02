@@ -1,5 +1,8 @@
 extends Node2D
 
+const COLLISION_MASK_CARD_SLOT = 2
+const COLLISION_MASK_CARD = 1
+
 # Reference to the card currently being dragged (null if none)
 var card_being_dragged
 # Stores the size of the screen/viewport, used to clamp the card's movement
@@ -40,10 +43,40 @@ func _input(event):
 
 func start_drag(card):
 	card_being_dragged = card
-	card.scale = Vector2(1, 1)
+	card.scale = Vector2(1.3, 1.3)
 func finish_drag():
-	card_being_dragged.scale = Vector2(1.05, 1.05)
+	card_being_dragged.scale = Vector2(1.2, 1.2)
+	var card_slot_found = raycast_check_for_cardslot()
+	if card_slot_found and not card_slot_found.card_in_slot:
+		card_being_dragged.position = card_slot_found.position
+		card_being_dragged.get_node("Area2D/CollisionShape2D")
 	card_being_dragged = null
+func raycast_check_for_cardslot():
+	# Get the 2D world's physics state, needed for collision queries
+	var space_state = get_world_2d().direct_space_state
+	
+	# Create the parameters for the point query (position to be checked)
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	
+	# Allow the query to detect Area2D nodes (not just solid physics bodies)
+	parameters.collide_with_areas = true
+	
+	# Define the collision layer to be considered in the search
+	parameters.collision_mask = COLLISION_MASK_CARD_SLOT
+	
+	# Run the query and return a list of collisions found at that point
+	var result = space_state.intersect_point(parameters)
+	
+	if result.size() > 0:
+		# If something was found, print the result for debugging
+		print(result)
+		# Return the parent node of the found collider
+		# (assuming the collision Area2D is a child of the actual "Card" node)
+		return result[0].collider.get_parent()
+	
+	# No card found under the cursor
+	return null
 
 func connect_card_signals(card):
 	card.connect("hovered", on_hovered_over_card)
@@ -64,10 +97,10 @@ func on_hovered_off_card(card):
 	
 func highlight_card(card, hovered):
 	if hovered:
-		card.scale = Vector2(1, 1)
+		card.scale = Vector2(1.2, 1.2)
 		card.z_index = 2
 	else:
-		card.scale = Vector2(1.05, 1.05)
+		card.scale = Vector2(1.3, 1.3)
 		card.z_index = 1
 
 func raycast_check_for_card():
