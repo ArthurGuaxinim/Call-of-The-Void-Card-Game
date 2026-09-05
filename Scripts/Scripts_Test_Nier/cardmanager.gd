@@ -11,6 +11,7 @@ var screen_size
 # so the card doesn't "jump" to the center of the cursor when dragging starts
 var drag_offset := Vector2.ZERO
 var is_hovering_on_card
+var player_hand_reference
 func _ready() -> void:
 	# Get the viewport size once, when the scene starts
 	screen_size = get_viewport_rect().size
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 			clamp(mouse_pos.x, 0, screen_size.x), 
 			clamp(mouse_pos.y, 0, screen_size.y)
 		)
+		player_hand_reference = $"../PlayerHand"
 
 func _input(event):
 	# Check if the event is a mouse click and if it was the left button
@@ -45,11 +47,15 @@ func start_drag(card):
 	card_being_dragged = card
 	card.scale = Vector2(1.3, 1.3)
 func finish_drag():
+	player_hand_reference.remove_card_from_hand(card_being_dragged)
 	card_being_dragged.scale = Vector2(1.2, 1.2)
 	var card_slot_found = raycast_check_for_cardslot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		card_being_dragged.position = card_slot_found.position
-		card_being_dragged.get_node("Area2D/CollisionShape2D")
+		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
+		card_slot_found.card_in_slot = true
+	else:
+		player_hand_reference.add_card_to_hand(card_being_dragged)
 	card_being_dragged = null
 func raycast_check_for_cardslot():
 	# Get the 2D world's physics state, needed for collision queries
